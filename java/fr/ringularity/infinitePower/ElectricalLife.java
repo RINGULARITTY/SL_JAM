@@ -1,10 +1,7 @@
 package fr.ringularity.infinitePower;
 
-import fr.ringularity.infinitePower.InstancedObjects.BlocksInstance;
-import fr.ringularity.infinitePower.InstancedObjects.ItemsInstance;
-import fr.ringularity.infinitePower.registers.BlocksRegistry;
-import fr.ringularity.infinitePower.registers.ItemsRegistry;
-import fr.ringularity.infinitePower.tools.JsonRegister.JsonRegister;
+import fr.ringularity.infinitePower.objects.containers.ContainerRegistry;
+import fr.ringularity.infinitePower.tools.jsonRegister.JsonRegister;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -16,16 +13,13 @@ import org.apache.logging.log4j.Logger;
 @Mod("electricallife")
 public class ElectricalLife {
     private static final Logger LOGGER = LogManager.getLogger();
-    public static final String MOD_ID = "electricallife";
 
 
     public ElectricalLife() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-        ItemsRegistry.init(); ItemsInstance.init();
-        BlocksRegistry.init(); BlocksInstance.init();
-        JsonRegister.createJsonFiles();
+        //JsonRegister.createJsonFiles();
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -35,6 +29,6 @@ public class ElectricalLife {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-
+        ContainerRegistry.registerScreen();
     }
 }
